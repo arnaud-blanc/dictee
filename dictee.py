@@ -2,16 +2,6 @@ import math
 from random import randint
 
 import streamlit as st
-from streamlit_extras.let_it_rain import rain
-
-emoji = "🦄 🌈 👸🏻 💖 ✨ 🐖".split()
-
-rain(
-    emoji=emoji[randint(0, len(emoji) - 1)],
-    font_size=54,
-    falling_speed=5,
-    animation_length=2,
-)
 
 st.header('La dictée c\'est :blue[cool] :sunglasses:', divider="rainbow")
 
