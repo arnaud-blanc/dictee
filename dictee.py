@@ -1,5 +1,17 @@
 import math
+from random import randint
+
 import streamlit as st
+from streamlit_extras.let_it_rain import rain
+
+emoji = "🦄 🌈 👸🏻 💖 ✨ 🐖".split()
+
+rain(
+    emoji=emoji[randint(0, len(emoji) - 1)],
+    font_size=54,
+    falling_speed=5,
+    animation_length=2,
+)
 
 st.header('La dictée c\'est :blue[cool] :sunglasses:', divider="rainbow")
 
@@ -9,16 +21,21 @@ words_nb = st.number_input("**Nombre total de mots :**", value=1, min_value=1)
 faults_nb = st.number_input("**Nombre total d'erreurs :**", value=0,)
 
 score = (words_nb - faults_nb)/ words_nb
-st.write(f"**Pourcentage de réussite** : {score * 100:.2f}%")
+st.write(f"**Pourcentage de réussite : :red[{score * 100:.2f}] %**")
+
+container = st.container()
 
 notation = st.radio(
-    "Note minimale :",
-    ["**0**", "**10**",],
+    "**Note minimale** :",
+    options=["**0**", "**10**",],
     index=None, horizontal=True
 )
 
-if notation is None:
-    st.write(":red[^^ choisir la note minimale ^^]")
+with container:
+    if notation is None:
+        st.write("**:red[choisir la note minimale]**")
+    else:
+        st.write("")
 
 def which_decimal(score: float) -> float:
     decimal_value = score - math.floor(score)
@@ -39,9 +56,9 @@ elif notation == "**10**":
 
 if notation is not None:
     "**résultat réel** :"
-    st.write(f"=> {score} / 20")
+    st.write(f"**=> {score} / 20**")
     "**résultat arrondi** :"
-    st.write(f"=> **:red[{which_decimal(score)}]** / 20")
+    st.write(f"**=> :red[{which_decimal(score)}] / 20**")
     
     
     
